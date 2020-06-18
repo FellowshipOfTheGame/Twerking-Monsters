@@ -27,6 +27,9 @@ public class Item : MonoBehaviour
 {
     public string nameItem;
     public IdItem idItem;
+
+    public Skill skill;
+
     public TypeItem typeItem;
     private SpriteRenderer itemSpriteRenderer;
     /// <summary>

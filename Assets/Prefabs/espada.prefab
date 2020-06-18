@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Espada
   idItem: 1
+  skill: {fileID: 11400000, guid: 0fa42a7e18c07e1469c57c89a7a84459, type: 2}
   typeItem: 1
 --- !u!61 &-3517871198356364459
 BoxCollider2D:

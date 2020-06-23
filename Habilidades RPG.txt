@@ -1,9 +1,0 @@
-espada + escudo: stun
-espada + capa: velocidade de ataque
-espada + grimorio: meio circulo de fogo em frente
-arco + escudo: gruda o escudo no chao e ele vira tipo uma parede temporaria
-arco + capa: invisibilidade
-arco + grimorio: flecha explode
-cajado + escudo: escudo/ vida temporaria
-cajado + capa: invencibilidade + velociade de mov
-cajado + grimorio: explosão que empurra

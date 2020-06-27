@@ -41,12 +41,17 @@ public abstract class Entity : MonoBehaviour {
     // buff system
     protected Dictionary<string, Buff> activeBuffs;
 
+    protected float modHealth;
+    protected float modMana;
+    protected float modSpeed;
+    protected float modArmor;
+
     protected struct Buff {
         public float value;
         public float time;
     }
 
-    // Monobehaviour
+    // Monobehaviour lifecycle
     protected void Start() {
         currentHealth = maximumHealth;
         currentMana = maximumMana;
@@ -70,8 +75,7 @@ public abstract class Entity : MonoBehaviour {
         }
     }
 
-    // other func
-
+    // useful functions
     public bool Damage(float rawDamage) {
         currentHealth -= rawDamage * (1f - (baseArmor + armorModifier)) / 100;
         return currentHealth > 0;
@@ -88,7 +92,16 @@ public abstract class Entity : MonoBehaviour {
     }
 
     public bool TemporaryBuff(Stat stat, float value, float totalSeconds) {
-
+        switch (stat) {
+            case Stat.HEALTH:
+                break;
+            case Stat.MANA:
+                break;
+            case Stat.SPEED:
+                break;
+            case Stat.ARMOR:
+                break;
+        }
     }
 
     public bool UseMana(float ammount) {

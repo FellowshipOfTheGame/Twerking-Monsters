@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
     public int defence;
 
     ///================================================================
-    public bool isDie = false;
+    public bool isDead = false;
 
 
 
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!isDie)
+        if (!isDead)
         {
             ManageMovement();
         }

@@ -15,9 +15,9 @@ TagManager:
   - 
   - 
   - Player
-  - Item
-  - Inimigo
-  - 
+  - Enemy
+  - Collectible
+  - Terrain
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 3948224047
     locked: 0

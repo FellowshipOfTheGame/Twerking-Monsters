@@ -14,8 +14,8 @@ public abstract class Entity : MonoBehaviour {
     // stats stuff
     [Space]
     [Header("Stats")]
-    protected float currentHealth;
-    protected float currentMana;
+    public float currentHealth;
+    public float currentMana;
 
     public float maximumHealth;
     public float maximumMana;
@@ -35,10 +35,10 @@ public abstract class Entity : MonoBehaviour {
     // buff system
     protected Dictionary<string, Buff> activeBuffs;
 
-    protected float modHealth;
-    protected float modMana;
-    protected float modSpeed;
-    protected float modArmor;
+    public float modHealth;
+    public float modMana;
+    public float modSpeed;
+    public float modArmor;
 
     protected struct Buff {
         public float value;
@@ -57,46 +57,56 @@ public abstract class Entity : MonoBehaviour {
         if (currentMana < maximumMana)
             currentMana = Mathf.Clamp(currentMana + (manaRegeneration * Time.deltaTime), 0f, maximumMana);
 
-        foreach (KeyValuePair<string, Buff> buff in activeBuffs) {
-            switch (buff.Key) {
+        List<string> keys = new List<string>();
+        foreach (string key in activeBuffs.Keys)
+            keys.Add(key);
+
+        foreach (string key in keys) {
+            Buff buff = activeBuffs[key];
+            buff.time = activeBuffs[key].time - Time.deltaTime;
+            buff.value = activeBuffs[key].value;
+            activeBuffs[key] = buff;
+
+
+            switch (key) {
                 case "damagePerSecond":
-                    if (buff.Value.time <= 0)
-                        activeBuffs.Remove(buff.Key);
+                    if (buff.time > 0)
+                        currentHealth -= buff.value * Time.deltaTime;
                     else
-                        currentHealth -= buff.Value.value * Time.deltaTime;
+                        activeBuffs.Remove(key);
                     break;
                 case "modHealth":
-                    if (buff.Value.time <= 0) {
-                        modHealth -= buff.Value.value;
-                        activeBuffs.Remove(buff.Key);
+                    if (buff.time <= 0) {
+                        modHealth -= buff.value;
+                        activeBuffs.Remove(key);
                     }
                     break;
                 case "modMana":
-                    if (buff.Value.time <= 0) {
-                        modMana -= buff.Value.value;
-                        activeBuffs.Remove(buff.Key);
+                    if (buff.time <= 0) {
+                        modMana -= buff.value;
+                        activeBuffs.Remove(key);
                     }
                     break;
                 case "modSpeed":
-                    if (buff.Value.time <= 0) {
-                        modSpeed -= buff.Value.value;
-                        activeBuffs.Remove(buff.Key);
+                    if (buff.time <= 0) {
+                        modSpeed -= buff.value;
+                        activeBuffs.Remove(key);
                     }
                     break;
                 case "modArmor":
-                    if (buff.Value.time <= 0) {
-                        modArmor -= buff.Value.value;
-                        activeBuffs.Remove(buff.Key);
+                    if (buff.time <= 0) {
+                        modArmor -= buff.value;
+                        activeBuffs.Remove(key);
                     }
                     break;
             }
-            activeBuffs[buff.Key] = new Buff() { value = buff.Value.value, time = buff.Value.time - Time.deltaTime };
         }
+
     }
 
     // useful functions
     public bool Damage(float rawDamage) {
-        currentHealth -= rawDamage * (1f - (baseArmor + armorModifier)) / 100;
+        currentHealth -= rawDamage * (100f - (baseArmor + armorModifier)) / 100f;
         return currentHealth > 0;
     }
 

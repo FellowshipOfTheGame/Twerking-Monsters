@@ -16,4 +16,9 @@ MonoBehaviour:
   arcAngle: 90
   arcRadius: 1
   damage: 50
+  fireDamage: 0
+  fireDuration: 0
   knockbackIntensity: 5
+  statToBuff: 0
+  modifierValue: 0
+  buffTime: 3

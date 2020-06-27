@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BowAttack
   m_EditorClassIdentifier: 
   energyCost: 0
-  projectile: {fileID: 0}
-  speed: 0
-  maxDistance: 0
+  projectile: {fileID: 6132066652078326828, guid: 037e92af1521e6543a85dae7104c4856,
+    type: 3}
+  speed: 5
+  maxDistance: 15

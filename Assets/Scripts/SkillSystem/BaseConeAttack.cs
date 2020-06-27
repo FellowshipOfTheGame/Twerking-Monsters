@@ -20,6 +20,10 @@ public class BaseConeAttack : Skill {
     [Tooltip("Módulo da aceleração a ser aplicada nos alvos")]
     public float knockbackIntensity;
 
+    public Entity.Stat statToBuff;
+    public float modifierValue;
+    public float buffTime;
+
     private static readonly float Precision = 30f;
 
     protected override void OnTrigger(Transform parent, Vector2 target, ContactFilter2D contactFilter, bool hasFireDamage) {
@@ -44,6 +48,10 @@ public class BaseConeAttack : Skill {
             if (collider.attachedRigidbody != null) {
                 Vector2 dir_away = collider.transform.position - hitbox.transform.position;
                 collider.attachedRigidbody.velocity = dir_away.normalized * knockbackIntensity;
+            }
+
+            if (modifierValue != 0f) {
+                entity.TemporaryBuff(statToBuff, modifierValue, buffTime);
             }
         }
 

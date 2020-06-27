@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StaffAttack
   m_EditorClassIdentifier: 
   energyCost: 0
-  projectile: {fileID: 0}
-  speed: 0
-  maxDistance: 0
+  projectile: {fileID: 6406749772896917011, guid: 28c3239d63dcdae4da41b8bcf5825c88,
+    type: 3}
+  speed: 10
+  maxDistance: 20

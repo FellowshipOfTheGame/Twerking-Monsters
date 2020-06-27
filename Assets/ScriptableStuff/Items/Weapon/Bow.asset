@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db6c4c1e7bc024cb40564e533ad18b, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  itemName: 
-  description: 
+  itemName: Bow
+  description: shoots arrows
   icon: {fileID: 0}
-  attack: {fileID: 0}
-  weaponType: 0
+  attack: {fileID: 11400000, guid: ce0ffd3ff4d3c8346970219e226853de, type: 2}
+  weaponType: 1

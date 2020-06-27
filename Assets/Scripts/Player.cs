@@ -10,6 +10,9 @@ public class Player : Entity {
     CharacterAnimation characterAnimation;
     WeaponObject weaponObject;
 
+    public HealthBar healthBar;
+    public ManaBar manaBar;
+
     [Space]
     [Header("Equipment")]
     public Weapon weapon;
@@ -34,6 +37,9 @@ public class Player : Entity {
         HandleMovement();
         HandleAttack();
 
+        healthBar.SetHealth(currentHealth / maximumHealth);
+        manaBar.SetMana(currentMana / maximumMana);
+
         if (armor != null)
             characterAnimation.armorSheet = armor.appearance;
     }
@@ -42,14 +48,14 @@ public class Player : Entity {
         Vector2 mouseWolrdPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mouseDirection = new Vector2(mouseWolrdPos.x - transform.position.x, mouseWolrdPos.y - transform.position.y).normalized;
 
-        if (Input.GetButton("Fire1") && attackBuffer == 0f) {
+        if (Input.GetButton("Fire1") && attackBuffer == 0f && weapon != null) {
             weaponObject.TriggerAttack();
-            weapon.Attack(transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 }, classItem.name.Equals("grimoire"));
+            weapon.Attack(transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 }, (classItem ? classItem.name.Equals("grimoire") : false));
             attackBuffer = GetAttackSpeed();
         }
 
-        if (Input.GetButton("Fire2") && attackBuffer == 0f) {
-            //classItem.TriggerSkill(weapon.weaponType, transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 });
+        if (Input.GetButton("Fire2") && attackBuffer == 0f  && classItem != null) {
+            classItem.TriggerSkill(weapon.weaponType, transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 });
             attackBuffer = GetAttackSpeed();
         }
 

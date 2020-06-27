@@ -21,10 +21,10 @@ public abstract class Skill : ScriptableObject {
     /// <param name="filter">Filtro de contato, caso a habilidade envolva algum tipo de colisão.</param>
     /// <returns>True caso a ativação seja um sucesso, false caso a quantidade de energia disponível seja menor que o custo da habilidade.</returns>
     public bool Trigger(Player parent, Vector2 target, ContactFilter2D filter) {
-        if (parent.stats.energyPoints < energyCost)
+        if (parent.mana < energyCost)
             return false;
 
-        parent.stats.energyPoints -= energyCost;
+        parent.mana -= energyCost;
         
         OnTrigger(parent, target, filter);
         

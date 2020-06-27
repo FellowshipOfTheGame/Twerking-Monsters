@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -152,6 +152,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            OnDie();
             //verefica se esta com um item selecinado 
             if (idItem != IdItem.EMPTY)
             {
@@ -370,5 +371,10 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-
+    void OnDie()
+    {
+        Debug.Log("deu");
+        // playerAnimator.SetBool("isDie", true);
+        playerRigidbody2D.isKinematic = true;
+    }
 }

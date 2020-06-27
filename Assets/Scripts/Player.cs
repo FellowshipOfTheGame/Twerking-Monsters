@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     // ===== ATRIBUTOS =====
 
     //Essa classe contem todos os atributos e caracteristicas de inimigos, player e cenario do jogo
-    public float life = 100;//vida max do jogador
+    public float currentHealth = 100;//vida max do jogador
     public float mana = 100;// mana max do jogdor
     public float manaMax;
     public Armor current;// weapondura atual do jogador
@@ -54,12 +54,14 @@ public class Player : MonoBehaviour
     public IdItem idPrimaryWeapon;
     public IdItem idSecondaryWeapon;
     public IdItem idArmor;
-    //==============new passives
     public int passiveDefense = 2;
     public float passiveSpeed = 0.5f;
     private float speedBase = 1;
     public bool passiveFire = false;
     public int defence;
+
+    ///================================================================
+    public bool isDie = false;
 
 
 
@@ -81,7 +83,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        ManageMovement();
+        if (!isDie)
+        {
+            ManageMovement();
+        }
         Bau();
         Atack();
 
@@ -144,7 +149,7 @@ public class Player : MonoBehaviour
 
     public float LifeWave(Armor Current, float LifeCurrent)
     {// cura por  wave
-        LifeCurrent = LifeCurrent + (life * (Current.life_wave / 100));// a cura é na vida maxima por isso usa-se life player
+        LifeCurrent = LifeCurrent + (currentHealth * (Current.life_wave / 100));// a cura é na vida maxima por isso usa-se life player
         return LifeCurrent;
     }
 
@@ -152,7 +157,6 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            OnDie();
             //verefica se esta com um item selecinado 
             if (idItem != IdItem.EMPTY)
             {
@@ -371,10 +375,5 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-    void OnDie()
-    {
-        Debug.Log("deu");
-        // playerAnimator.SetBool("isDie", true);
-        playerRigidbody2D.isKinematic = true;
-    }
+
 }

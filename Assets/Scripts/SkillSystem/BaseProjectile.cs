@@ -9,6 +9,7 @@ public abstract class BaseProjectile : MonoBehaviour {
     bool hasMaxDistance;
     Vector2 origin;
     float maxDistance;
+    bool hasFireDamage;
 
     // Ajustar a rotação do objeto com base na velocidade.
     [HideInInspector] public bool rotateToMatchVelocity = true;
@@ -38,10 +39,10 @@ public abstract class BaseProjectile : MonoBehaviour {
         }
     }
 
-    public abstract void OnTargetHit(Collider2D targetCollider, ContactFilter2D contactFilter);
+    public abstract void OnTargetHit(Collider2D targetCollider, ContactFilter2D contactFilter, bool hasFireDamage);
 
     void OnTriggerEnter2D(Collider2D targetCollider) {
-        OnTargetHit(targetCollider, contactFilter);
+        OnTargetHit(targetCollider, contactFilter, hasFireDamage);
     }
 
     protected void QueueDestruction() {
@@ -49,7 +50,7 @@ public abstract class BaseProjectile : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public GameObject InstantiateProjectile(Vector2 origin, Vector2 direction, float speed, float maxDistance, ContactFilter2D contactFilter) {
+    public GameObject InstantiateProjectile(Vector2 origin, Vector2 direction, float speed, float maxDistance, ContactFilter2D contactFilter, bool hasFireDamage) {
         GameObject obj = Instantiate(gameObject, origin, Quaternion.identity);
         if (maxDistance > 0) {
             obj.GetComponent<BaseProjectile>().origin = origin;

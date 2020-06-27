@@ -36,9 +36,6 @@ public class Player : Entity {
 
         if (armor != null)
             characterAnimation.armorSheet = armor.appearance;
-
-        if (manaPoints < maxManaPoints)
-            manaPoints += armor ? armor.manaRegen * Time.deltaTime : 0f;
     }
 
     void HandleAttack() {
@@ -47,7 +44,7 @@ public class Player : Entity {
 
         if (Input.GetButton("Fire1") && attackBuffer == 0f) {
             weaponObject.TriggerAttack();
-            weapon.Attack(transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 });
+            weapon.Attack(transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 }, classItem.name.Equals("grimoire"));
             attackBuffer = GetAttackSpeed();
         }
 

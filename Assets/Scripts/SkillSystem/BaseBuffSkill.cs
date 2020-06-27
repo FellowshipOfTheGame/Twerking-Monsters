@@ -5,15 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newBuffSkill", menuName = "Skill/BuffSkill")]
 public class BaseBuffSkill : Skill {
 
-    public float speedModifier;
+    public Entity.Stat statToBuff;
+    public float modifierValue;
     public float buffTime;
 
-    protected override void OnTrigger(Transform parent, Vector2 target, ContactFilter2D filter) {
+    protected override void OnTrigger(Transform parent, Vector2 target, ContactFilter2D filter, bool hasFireDamage) {
         Entity entity = parent.GetComponent<Entity>();
         if (entity == null)
             return;
-        entity.StartCoroutine(BuffStat(entity, speedModifier, buffTime));
-
+        entity.TemporaryBuff(statToBuff, modifierValue, buffTime);
     }
 
     IEnumerator BuffStat(Entity entity, float speedModifier, float buffTime) {

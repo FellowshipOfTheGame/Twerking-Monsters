@@ -15,8 +15,8 @@ public class BaseProjectileAttack : Skill {
     public float speed;
     public float maxDistance;
 
-    protected override void OnTrigger(Transform parent, Vector2 target, ContactFilter2D contactFilter) {
-        projectile.InstantiateProjectile(parent.position, target, speed, maxDistance, contactFilter);
+    protected override void OnTrigger(Transform parent, Vector2 target, ContactFilter2D contactFilter, bool hasFireDamage) {
+        projectile.InstantiateProjectile(parent.position, target, speed, maxDistance, contactFilter, hasFireDamage);
     }
 
 }

@@ -14,15 +14,15 @@ public class ClassItem : Item {
     public void TriggerSkill(Weapon.Type weaponType, Transform parent, Vector2 target, ContactFilter2D filter) {
         switch (weaponType) {
             case Weapon.Type.SWORD:
-                swordSkill.Trigger(parent, target, filter);
+                swordSkill.Trigger(parent, target, filter, false);
                 break;
             
             case Weapon.Type.BOW:
-                bowSkill.Trigger(parent, target, filter);
+                bowSkill.Trigger(parent, target, filter, false);
                 break;
             
             case Weapon.Type.STAFF:
-                staffSkill.Trigger(parent, target, filter);
+                staffSkill.Trigger(parent, target, filter, false);
                 break;
         }
     }

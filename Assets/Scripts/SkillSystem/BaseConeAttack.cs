@@ -14,12 +14,15 @@ public class BaseConeAttack : Skill {
     [Tooltip("Quantidade de dano infligido")]
     public float damage;
 
+    public float fireDamage;
+    public float fireDuration;
+
     [Tooltip("Módulo da aceleração a ser aplicada nos alvos")]
     public float knockbackIntensity;
 
     private static readonly float Precision = 30f;
 
-    protected override void OnTrigger(Transform parent, Vector2 target, ContactFilter2D contactFilter) {
+    protected override void OnTrigger(Transform parent, Vector2 target, ContactFilter2D contactFilter, bool hasFireDamage) {
         PolygonCollider2D hitbox;
         hitbox = GenerateConeHitbox(parent, arcAngle, arcRadius, target);
 
@@ -32,8 +35,11 @@ public class BaseConeAttack : Skill {
 
             Entity entity = collider.GetComponent<Entity>();
 
-            if (entity != null)
+            if (entity != null) {
                 entity.Damage(damage);
+                if (hasFireDamage)
+                    entity.DamageOverTime(fireDamage, fireDuration);
+            }
 
             if (collider.attachedRigidbody != null) {
                 Vector2 dir_away = collider.transform.position - hitbox.transform.position;

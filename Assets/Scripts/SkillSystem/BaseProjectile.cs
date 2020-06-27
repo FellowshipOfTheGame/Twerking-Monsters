@@ -56,6 +56,7 @@ public abstract class BaseProjectile : MonoBehaviour {
             obj.GetComponent<BaseProjectile>().origin = origin;
             obj.GetComponent<BaseProjectile>().maxDistance = maxDistance;
             obj.GetComponent<BaseProjectile>().hasMaxDistance = true;
+            obj.GetComponent<BaseProjectile>().hasFireDamage = hasFireDamage;
             obj.GetComponent<BaseProjectile>().contactFilter = contactFilter;
         }
         obj.GetComponent<BaseProjectile>().rotateToMatchVelocity = true;

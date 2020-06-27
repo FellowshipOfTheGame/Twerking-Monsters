@@ -11,10 +11,6 @@ public abstract class Entity : MonoBehaviour {
         SPEED,
     }
 
-    // attack stuff
-    public Weapon baseAttack;
-    public Vector2 target;
-
     // stats stuff
     [Space]
     [Header("Stats")]
@@ -24,10 +20,8 @@ public abstract class Entity : MonoBehaviour {
     public float maximumHealth;
     public float maximumMana;
 
-    public float healthRegeneration;
-    public float manaRegeneration;
-
-    public float extraHealth;
+    protected float healthRegeneration;
+    protected float manaRegeneration;
 
     public float baseSpeed;
     protected float speedModifier;
@@ -53,6 +47,8 @@ public abstract class Entity : MonoBehaviour {
 
     // Monobehaviour lifecycle
     protected void Start() {
+        activeBuffs = new Dictionary<string, Buff>();
+
         currentHealth = maximumHealth;
         currentMana = maximumMana;
     }

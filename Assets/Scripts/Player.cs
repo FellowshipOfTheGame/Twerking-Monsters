@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     public float speed;
     private int lookingDir;//0 up, 1 right, 2 down, 3 left
     private bool isMirrored;
+
     [Space]
     [Header("Componentes")]
     private Animator playerAnimator;
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour
     private Chest roomChest;
 
     public Skill selectedSkill;
+    public Skill secondSkill;
 
     public Skill tempSelectedSkill;//cria um local temp para guarda o skill;
 
@@ -56,6 +59,7 @@ public class Player : MonoBehaviour
     public float passiveSpeed = 0.5f;
     private float speedBase = 1;
     public bool passiveFire = false;
+    public int defence;
 
 
 
@@ -170,7 +174,7 @@ public class Player : MonoBehaviour
                                 passiveFire = true;
                                 break;
                             case IdItem.SHIELD://escudo
-                                               //onde fica defesa  = current.defense + passiveDefense;
+                                defence = current.defense + passiveDefense;
                                 break;
 
                             default:
@@ -191,6 +195,7 @@ public class Player : MonoBehaviour
                 Destroy(roomChest.gameObject);
                 //coloca o skill em temporario como definitivo
                 selectedSkill = tempSelectedSkill;
+                ActiveSecoundSkill();
             }
             else
             {
@@ -199,13 +204,21 @@ public class Player : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Quando chamado realiza os ataques baseado nos skills selecionados
+    /// </summary>
     void Atack()
     {
-        if (Input.GetMouseButtonDown(0))
+        //verefica a se o mouse foi clicado e se a primeira skill não é nula
+        if (Input.GetButtonDown("Fire1") && selectedSkill != null)
         {
-            selectedSkill.Trigger(gameObject,weapon.gameObject.transform.position,);
+            //  selectedSkill.Trigger(this, weapon.gameObject.transform.position, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 });
         }
-
+        //verefica a se o mouse foi clicado e se a segunda skill não é nula
+        if (Input.GetButtonDown("Fire2") && secondSkill != null)
+        {
+            //  secondSkill.Trigger(this, weapon.gameObject.transform.position, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 });
+        }
     }
 
     void ManageMovement()
@@ -290,6 +303,72 @@ public class Player : MonoBehaviour
         passiveFire = false;
         speed = speedBase;
         //onde fica defesa  = current.defense
+    }
+
+    /// <summary>
+    /// Quando chamado verefica os itens equipados e escolhe o segundo especial em relação a eles
+    /// </summary>
+    void ActiveSecoundSkill()
+    {
+        switch (idPrimaryWeapon)
+        {
+            case IdItem.BOW://Arco
+
+                switch (idSecondaryWeapon)
+                {
+                    case IdItem.CAPE://capa
+                        //secondSkill = //arco + capa
+                        break;
+                    case IdItem.GRIMOIRE://Grimorio
+                        //secondSkill = //arco+ grimorio
+                        break;
+                    case IdItem.SHIELD://escudo
+                        //secondSkill = //arco + escudo
+                        break;
+                    default:
+                        //secondSkill = //sem secondSkill
+                        break;
+                }
+                break;
+
+            case IdItem.SWORD://espada
+                switch (idSecondaryWeapon)
+                {
+                    case IdItem.CAPE://capa
+                        //secondSkill = //espada+ capa
+                        break;
+                    case IdItem.GRIMOIRE://grimorio
+                        //secondSkill = //espada + grimorio
+                        break;
+                    case IdItem.SHIELD://escudo
+                        //secondSkill = //espada + escudo
+                        break;
+                    default:
+                        //secondSkill = //sem secondSkill
+                        break;
+                }
+                break;
+            case IdItem.WAND://
+                switch (idSecondaryWeapon)
+                {
+                    case IdItem.CAPE://capa
+                        //secondSkill = //wand + capa
+                        break;
+                    case IdItem.GRIMOIRE://grimorio
+                        //secondSkill = //wand + grimorio
+                        break;
+                    case IdItem.SHIELD://escudo
+                        //secondSkill = //wand + escudo
+                        break;
+                    default:
+                        //secondSkill = //sem secondSkill
+                        break;
+                }
+                break;
+            default:
+                //secondSkill = //sem secondSkill
+                break;
+        }
     }
 
 }

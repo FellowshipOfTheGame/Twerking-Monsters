@@ -19,7 +19,7 @@ public class BaseConeAttack : Skill {
 
     private static readonly float Precision = 30f;
 
-    protected override void OnTrigger(Entity parent, Vector2 target, ContactFilter2D contactFilter) {
+    protected override void OnTrigger(Player parent, Vector2 target, ContactFilter2D contactFilter) {
         PolygonCollider2D hitbox;
         hitbox = GenerateConeHitbox(parent, arcAngle, arcRadius, target);
 
@@ -44,7 +44,7 @@ public class BaseConeAttack : Skill {
         Destroy(hitbox, 0.5f);
     }
 
-    PolygonCollider2D GenerateConeHitbox(Entity parent, float angle, float radius, Vector2 direction) {
+    PolygonCollider2D GenerateConeHitbox(Player parent, float angle, float radius, Vector2 direction) {
         Vector2[] points;
         int numPoints = Mathf.FloorToInt(angle / Precision);
         float angleBetweenPoints = angle / (numPoints + 1);

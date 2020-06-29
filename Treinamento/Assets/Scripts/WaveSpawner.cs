@@ -17,12 +17,12 @@ public class WaveSpawner : MonoBehaviour {
 
     public Wave waves;
     public Transform[] spawnPoint;
-    public int waveCount = 0;
     public Rigidbody2D player;
     private float searchCountdown = 1f;
     private bool isAlive = true;
     private bool endWaves = false;
     public bool isSpawn = false;
+    private bool alredyOnFight = false;
 
     private void Start() {
         player = gameObject.GetComponent<Rigidbody2D>();
@@ -34,16 +34,19 @@ public class WaveSpawner : MonoBehaviour {
     private void Update() {
         
         if (isSpawn) {
-            //Spawn inimigos
-            Spawn(waves);
-            Debug.Log("Spawnando");
-            isSpawn = false;
+            if (!alredyOnFight) {
+                //Spawn inimigos
+                Spawn(waves);
+                Debug.Log("Spawnando");
+                isSpawn = false;
+                alredyOnFight = true;
+            }
         }   
 
         isAlive = EnemyIsAlive();
 
         //Testando caso não haja mais inimigos
-        if (!isAlive) {
+        if (isAlive) {
             Debug.Log("LIBERA O BAÚ");
             //Libera o báu e libera a próxima fase
         }
@@ -51,7 +54,7 @@ public class WaveSpawner : MonoBehaviour {
     }
 
     //Spawnando inimigos
-    void Spawn(Wave _wave) {
+    void Spawn(Wave _wave) { 
 
         for (int i = 0; i < _wave.enemyamount; i++)
         {
@@ -62,8 +65,6 @@ public class WaveSpawner : MonoBehaviour {
         {
             SpawnEnemy(_wave.enemy2);
         }
-
-        Debug.Log("Spawning Enemys");
     }
 
     void SpawnEnemy(Transform _enemy) {

@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4324993278369862684}
   - component: {fileID: 4324993278369862685}
   - component: {fileID: 8083244933286224781}
-  - component: {fileID: 1819372944990812697}
+  - component: {fileID: 4698867625872615417}
   m_Layer: 10
   m_Name: Enemy AI
   m_TagString: Enemy
@@ -212,24 +212,19 @@ CapsuleCollider2D:
   m_Offset: {x: -0.001, y: 0}
   m_Size: {x: 0.16, y: 0.32}
   m_Direction: 0
---- !u!50 &1819372944990812697
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &4698867625872615417
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4324993278369862682}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecbd70506be9944b9207a97e81b84ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 100
+  fire: 0
+  target: {fileID: 4181099662443553950, guid: ff8ccbed45dd565418d79838e69c2381, type: 3}
+  script: {fileID: 4324993278369862684}

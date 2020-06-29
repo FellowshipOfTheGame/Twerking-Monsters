@@ -45,10 +45,17 @@ public class BaseConeAttack : Skill {
                     entity.DamageOverTime(fireDamage, fireDuration);
             }
 
+            Enemy enemy = collider.GetComponent<Enemy>();
+            if (enemy != null) {
+                Vector2 dir_away = collider.transform.position - hitbox.transform.position;
+                enemy.Stun(dir_away, knockbackIntensity);
+            }
+
             if (collider.attachedRigidbody != null) {
                 Vector2 dir_away = collider.transform.position - hitbox.transform.position;
                 collider.attachedRigidbody.velocity = dir_away.normalized * knockbackIntensity;
             }
+
 
             if (modifierValue != 0f) {
                 entity.TemporaryBuff(statToBuff, modifierValue, buffTime);

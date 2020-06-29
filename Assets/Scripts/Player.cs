@@ -8,7 +8,6 @@ public class Player : Entity {
     Animator playerAnimator;
     Rigidbody2D playerRigidbody2D;
     CharacterAnimation characterAnimation;
-    WeaponObject weaponObject;
 
     public HealthBar healthBar;
     public ManaBar manaBar;
@@ -25,10 +24,9 @@ public class Player : Entity {
     new void Start() {
         base.Start();
 
-        playerAnimator = GetComponent<Animator>();
-        playerRigidbody2D = GetComponent<Rigidbody2D>();
-        characterAnimation = GetComponent<CharacterAnimation>();
-        weaponObject = GetComponentInChildren<WeaponObject>();
+        playerAnimator = gameObject.GetComponent<Animator>();
+        playerRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        characterAnimation = gameObject.GetComponent<CharacterAnimation>();
     }
 
     new void Update() {
@@ -49,7 +47,6 @@ public class Player : Entity {
         Vector2 mouseDirection = new Vector2(mouseWolrdPos.x - transform.position.x, mouseWolrdPos.y - transform.position.y).normalized;
 
         if (Input.GetButton("Fire1") && attackBuffer == 0f && weapon != null) {
-            weaponObject.TriggerAttack();
             weapon.Attack(transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 }, (classItem ? classItem.name.Equals("grimoire") : false));
             attackBuffer = GetAttackSpeed();
         }
@@ -58,8 +55,6 @@ public class Player : Entity {
             classItem.TriggerSkill(weapon.weaponType, transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 });
             attackBuffer = GetAttackSpeed();
         }
-
-        weaponObject.direction = mouseDirection;
 
         if (attackBuffer > 0f)
             attackBuffer = Mathf.Clamp(attackBuffer - Time.deltaTime, 0f, attackBuffer);
@@ -71,8 +66,8 @@ public class Player : Entity {
 
         Vector2 direction = new Vector2(dirHorizontal, dirVertical).normalized;
 
-        playerAnimator.SetFloat("dirHorizontal", dirHorizontal);
-        playerAnimator.SetFloat("dirVertical", dirVertical);
+        playerAnimator.SetFloat("horizontalVelocity", dirHorizontal);
+        playerAnimator.SetFloat("verticalVelocity", dirVertical);
 
         playerRigidbody2D.velocity = direction * GetMoveSpeed();
     }

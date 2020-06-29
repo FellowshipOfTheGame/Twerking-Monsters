@@ -14,12 +14,18 @@ public class CharacterAnimation : MonoBehaviour {
     public float referencePixelsPerUnit;
     public float spriteWidth;
     public float spriteHeight;
-    public GameObject armor;
+
+    public GameObject armorObject;
+    public GameObject weaponObject;
 
     [Space]
-    [Header("Animation")]
+    [Header("Animation Movement and Armor")]
     public PlayerState state;
     public int frame;
+
+    [Space]
+    [Header("Animation Movement and Armor")]
+    public float weaponDistanceFromCenter;
 
     protected SpriteRenderer spriteRenderer;
     protected SpriteRenderer armorRenderer;
@@ -30,18 +36,51 @@ public class CharacterAnimation : MonoBehaviour {
         MOVING_LEFT = 1,
         MOVING_UP = 2,
         MOVING_DOWN = 3,
-        IDLE = 4,
+        IDLE_RIGHT = 4,
+        IDLE_LEFT = 5,
+        IDLE_UP = 6,
+        IDLE_DOWN = 7,
     }
 
     void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        armorRenderer = armor.GetComponent<SpriteRenderer>();
+        armorRenderer = armorObject.GetComponent<SpriteRenderer>();
     }
 
     void Update() {
         spriteRenderer.sprite = GetSpriteFromSheet(playerSheet, frame, (int) state);
         if (armorSheet != null)
             armorRenderer.sprite = GetSpriteFromSheet(armorSheet, frame, (int) state);
+
+        if (weaponObject != null) {
+            Vector2 mouseWolrdPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mouseDirection = new Vector2(mouseWolrdPos.x - transform.position.x, mouseWolrdPos.y - transform.position.y).normalized;
+
+            transform.localPosition = mouseDirection * weaponDistanceFromCenter;
+            
+            float weaponAngle = Vector2.Angle(Vector2.right, mouseDirection);
+            if (mouseDirection.y < 0)
+                weaponAngle = 360 - weaponAngle;
+            weaponAngle = SumAngles(weaponAngle, -45f);
+
+            transform.rotation = Quaternion.Euler(0f, 0f, weaponAngle);
+        }
+
+    }
+
+    float SumAngles(params float[] angles) {
+        float sum = 0;
+        float result;
+
+        for (int i = 0; i < angles.Length; i++)
+            sum += angles[i];
+
+        result = sum % 360;
+
+        if (result < 0)
+            result = 360 + result;
+
+        return result;
     }
 
     protected Sprite GetSpriteFromSheet(Texture2D spriteSheet, int x, int y) {

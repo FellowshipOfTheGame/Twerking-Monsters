@@ -6,9 +6,16 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour {
 
     RectTransform rect;
+    Player player;
 
     void Start() {
         rect = GetComponent<RectTransform>();
+        player = (Player) FindObjectOfType<Player>();
+    }
+
+    void Update() {
+        if (player != null)
+            SetHealth(player.currentHealth / player.maximumHealth);
     }
 
     public void SetHealth(float percentage) {

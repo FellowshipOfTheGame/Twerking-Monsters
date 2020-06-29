@@ -48,7 +48,8 @@ public class BaseConeAttack : Skill {
             Enemy enemy = collider.GetComponent<Enemy>();
             if (enemy != null) {
                 Vector2 dir_away = collider.transform.position - hitbox.transform.position;
-                enemy.Stun(dir_away, knockbackIntensity);
+                collider.attachedRigidbody.velocity = dir_away * knockbackIntensity;
+                enemy.DisableMovement(0.5f);
             }
 
             if (collider.attachedRigidbody != null) {

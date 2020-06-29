@@ -6,9 +6,16 @@ using UnityEngine.UI;
 public class ManaBar : MonoBehaviour {
 
     RectTransform rect;
+    Player player;
 
     void Start() {
         rect = GetComponent<RectTransform>();
+        player = (Player)FindObjectOfType<Player>();
+    }
+
+    void Update() {
+        if (player != null)
+            SetMana(player.currentMana / player.maximumMana);
     }
 
     public void SetMana(float percentage) {

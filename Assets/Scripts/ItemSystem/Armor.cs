@@ -8,7 +8,7 @@ public class Armor : Item {
     public Texture2D appearance;
 
     [Tooltip("Percentage of damage blocked")]
-    [Range(0, 100)] public float defense;
+    public float defense;
 
     public int speedModifier;
 

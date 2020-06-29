@@ -12,14 +12,16 @@ public class CollectableItem : MonoBehaviour {
         if (player == null)
             return;
 
-        if (item is Weapon)
-            player.weapon = item as Weapon;
-        else if (item is Armor)
-            player.armor = item as Armor;
-        else if (item is ClassItem)
-            player.classItem = item as ClassItem;
+        player.temp = item;
+    }
 
-        Destroy(gameObject);
+    void OnTriggerExit2D(Collider2D collider) {
+        Player player = collider.GetComponent<Player>();
+
+        if (player == null)
+            return;
+
+        player.temp = null;
     }
 
 }

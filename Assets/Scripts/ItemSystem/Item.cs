@@ -11,7 +11,7 @@ public abstract class Item : ScriptableObject  {
     public Sprite icon;
 
     public GameObject CreateGameObject(Vector2 origin) {
-        GameObject item = new GameObject("name", typeof(SpriteRenderer), typeof(CollectableItem), typeof(BoxCollider2D));
+        GameObject item = new GameObject(itemName, typeof(SpriteRenderer), typeof(CollectableItem), typeof(BoxCollider2D));
 
         item.GetComponent<SpriteRenderer>().sprite = icon;
         item.GetComponent<CollectableItem>().item = this;

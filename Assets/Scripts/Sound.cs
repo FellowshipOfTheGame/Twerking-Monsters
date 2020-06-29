@@ -13,10 +13,14 @@ public class Sound : MonoBehaviour
 
 
     // Start is called before the first frame update
-    /*void Start()
+    void Start()
     {
-       // sfxSourceEffect = gameObject.GetComponent<AudioSource>();
-    }*/
+        //atribui a musica
+        musicSource.clip = SfxMusic;
+        //colcoa a musica para tocar
+        musicSource.Play();
+        // sfxSourceEffect = gameObject.GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     void Update()

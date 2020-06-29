@@ -84,6 +84,7 @@ public class WaveSpawner : MonoBehaviour {
             searchCountdown = 1f;
             
             //Testando caso haja inimigos vivos, se sim retorna verdadeiro se n retorna falso
+            //Lembrar de colocar a tag Enemy nos inimigos
             if (GameObject.FindGameObjectWithTag("Enemy") == null)
             {
                 return true;

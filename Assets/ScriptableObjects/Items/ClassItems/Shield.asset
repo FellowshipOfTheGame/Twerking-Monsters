@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Shield
   description: Can block attacks
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 92f0a15a0ac8ba34dbec55e97165088b, type: 3}
   swordSkill: {fileID: 0}
   bowSkill: {fileID: 0}
   staffSkill: {fileID: 0}

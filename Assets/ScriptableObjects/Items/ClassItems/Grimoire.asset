@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Grimoire
   description: Casts powerful spells
-  icon: {fileID: 0}
-  swordSkill: {fileID: 0}
-  bowSkill: {fileID: 0}
-  staffSkill: {fileID: 0}
+  icon: {fileID: 21300000, guid: ef91d110588e6c94aa9de1c2d7fa7fad, type: 3}
+  swordSkill: {fileID: 11400000, guid: b6dff1c466f202b4b8d9056dd3e168b4, type: 2}
+  bowSkill: {fileID: 11400000, guid: 9fe7e45904f3e9243a849d86bd9cc7ea, type: 2}
+  staffSkill: {fileID: 11400000, guid: d640a3a3e6c2a644ab7ac2a1b3e4c715, type: 2}
   statModifier: 1
   statModifierValue: 0

@@ -135,6 +135,7 @@ MonoBehaviour:
   damage: 50
   fireDamage: 0
   fireDuration: 0
+  piercing: 1
 --- !u!61 &8220267051395137635
 BoxCollider2D:
   m_ObjectHideFlags: 0

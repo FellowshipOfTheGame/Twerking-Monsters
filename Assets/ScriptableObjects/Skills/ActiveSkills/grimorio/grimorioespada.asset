@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd052110892e90943921a269328b367c, type: 3}
+  m_Name: grimorioespada
+  m_EditorClassIdentifier: 
+  energyCost: 60
+  arcAngle: 90
+  arcRadius: 180
+  damage: 10
+  fireDamage: 5
+  fireDuration: 5
+  knockbackIntensity: 2
+  statToBuff: 0
+  modifierValue: 0
+  buffTime: 0

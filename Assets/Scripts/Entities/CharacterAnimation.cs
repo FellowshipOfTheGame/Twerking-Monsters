@@ -45,12 +45,15 @@ public class CharacterAnimation : MonoBehaviour {
     }
 
     void Start() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        armorRenderer = armorObject.GetComponent<SpriteRenderer>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        if (armorObject != null)
+            armorRenderer = armorObject.GetComponent<SpriteRenderer>();
     }
 
     void Update() {
         spriteRenderer.sprite = GetSpriteFromSheet(playerSheet, frame, (int) state);
+
         if (armorSheet != null)
             armorRenderer.sprite = GetSpriteFromSheet(armorSheet, frame, (int) state);
 

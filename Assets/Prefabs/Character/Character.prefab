@@ -191,6 +191,7 @@ MonoBehaviour:
   state: 3
   frame: 0
   weaponDistanceFromCenter: 0.85
+  weaponDirection: {x: 0, y: 0}
 --- !u!114 &3774556892567217764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,23 +204,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fea533fbf5086419b4f7973056e985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  currentMana: 0
   maximumHealth: 100
   maximumMana: 100
+  baseHealthRegeneration: 0
+  baseManaRegeneration: 0
   baseSpeed: 3
   moveSpeed: 1
-  attackSpeed: 0.2
+  attackSpeed: 2
   baseArmor: 0
-  modHealth: 0
-  modMana: 0
-  modSpeed: 0
-  modArmor: 0
-  healthBar: {fileID: 0}
-  manaBar: {fileID: 0}
-  weapon: {fileID: 0}
+  currentHealth: 0
+  currentMana: 0
+  healthModifier: 0
+  manaModifier: 0
+  speedModifier: 0
+  armorModifier: 0
+  weapon: {fileID: 11400000, guid: 9508454aa982b144bbd0d9dabc9e0955, type: 2}
   armor: {fileID: 0}
   classItem: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!50 &3774556892567217765
 Rigidbody2D:
   serializedVersion: 4

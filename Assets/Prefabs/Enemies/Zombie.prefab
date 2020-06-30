@@ -244,6 +244,7 @@ MonoBehaviour:
   attack: {fileID: 11400000, guid: 5f50c9f8105d92a44827507449a78f58, type: 2}
   range: 1
   enemy: 1
+  death: {fileID: 2852565444323612114, guid: 0b164bed1a4f5684198c03018d3d0f1d, type: 3}
   weapon: {fileID: 2893812144075380569, guid: e7c40d168cd97654cab18371346a8ead, type: 3}
 --- !u!114 &8516332387530134433
 MonoBehaviour:

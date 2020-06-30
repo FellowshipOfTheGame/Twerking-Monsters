@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Skill : ScriptableObject {
 
+    //public GameObject effect;
+
     [Tooltip("Quantidade de energia utilizada para a ativação da habilidade")]
     public float energyCost = 0f;
 
@@ -18,6 +20,8 @@ public abstract class Skill : ScriptableObject {
     /// <returns>True caso a ativação seja um sucesso, false caso a quantidade de energia disponível seja menor que o custo da habilidade.</returns>
     public bool Trigger(Transform parent, Vector2 target, ContactFilter2D filter, bool haveFireDamage) {
         Entity entity = parent.GetComponent<Entity>();
+
+        //GameObject newEffect = Instantiate(effect, parent.position, Quaternion.identity);
 
         if (entity == null) {
             OnTrigger(parent, target, filter, haveFireDamage);

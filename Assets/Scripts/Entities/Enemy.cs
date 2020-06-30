@@ -10,6 +10,7 @@ public class Enemy : Entity {
 
     public int enemy;
 
+    public GameObject death;
     public GameObject weapon;
 
     float attackBuffer;
@@ -47,10 +48,9 @@ public class Enemy : Entity {
         characterAnimation.weaponDirection = direction;
 
         if (currentHealth <= 0f) {
-            characterAnimation.enabled = false;
-            defeated = true;
-            animator.SetBool("defeated", true);
-            Destroy(gameObject, 0.5f);
+            GameObject morte = Instantiate(death, transform.position, Quaternion.identity);
+            Destroy(morte, 0.5f);
+            Destroy(gameObject);
             return;
         }
 

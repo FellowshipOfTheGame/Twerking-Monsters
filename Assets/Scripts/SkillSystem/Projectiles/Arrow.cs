@@ -7,6 +7,7 @@ public class Arrow : BaseProjectile {
     public float damage;
     public float fireDamage;
     public float fireDuration;
+    public bool piercing;
 
     public override void OnTargetHit(Collider2D targetCollider, ContactFilter2D contactFilter, bool hasFireDamage) {
         Entity enemy = targetCollider.GetComponent<Entity>();
@@ -18,6 +19,9 @@ public class Arrow : BaseProjectile {
 
         if (hasFireDamage)
             enemy.DamageOverTime(fireDamage, fireDuration);
+
+        if (!piercing)
+            Destroy(gameObject);
     }
 
 }

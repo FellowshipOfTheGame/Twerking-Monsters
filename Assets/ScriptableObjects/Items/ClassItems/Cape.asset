@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Cape
   description: Makes you harder to spot
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 548f056ec7c2a884b8bdc0032d038889, type: 3}
   swordSkill: {fileID: 0}
   bowSkill: {fileID: 0}
   staffSkill: {fileID: 0}

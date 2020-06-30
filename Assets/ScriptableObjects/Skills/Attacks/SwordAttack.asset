@@ -18,7 +18,7 @@ MonoBehaviour:
   damage: 25
   fireDamage: 10
   fireDuration: 5
-  knockbackIntensity: 10
+  knockbackIntensity: 3
   statToBuff: 0
   modifierValue: 0
   buffTime: 0

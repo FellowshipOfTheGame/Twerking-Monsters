@@ -13,6 +13,7 @@ public class EnemyProjectile : BaseProjectile {
             return;
 
         player.Damage(damage);
+
         Destroy(gameObject);
     }
 }

@@ -11,7 +11,7 @@ public class Player : Entity {
     public Armor armor;
     public ClassItem classItem;
 
-    [HideInInspector] public GameObject temp;
+    public GameObject temp;
 
     // Components
     Animator playerAnimator;
@@ -36,9 +36,7 @@ public class Player : Entity {
 
         HandleMovement();
         HandleAttack();
-
-
-
+        
         if (temp != null && Input.GetKeyDown(KeyCode.E)) {
             ChangeItem(temp.GetComponent<CollectableItem>().item);
             Destroy(temp);

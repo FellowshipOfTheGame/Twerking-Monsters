@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92db6c4c1e7bc024cb40564e533ad18b, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  itemName: 
-  description: 
-  icon: {fileID: 0}
-  attack: {fileID: 0}
-  weaponType: 0
-  weaponObject: {fileID: 0}
+  itemName: Bow
+  description: Shoots arrows
+  icon: {fileID: -4489736376070484022, guid: f1ed3a691bc098547838259effac2239, type: 3}
+  attack: {fileID: 11400000, guid: 82e6b53c3a6ba684aa4c8b637e57d348, type: 2}
+  weaponType: 1
+  weaponObject: {fileID: 7882508522519359542, guid: 34978fa8ec36d8c42820a842d96c4da8,
+    type: 3}

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462d073addeeeb7498af3a88dbca445c, type: 3}
   m_Name: MediumArmor
   m_EditorClassIdentifier: 
-  itemName: 
-  description: 
+  itemName: Medium armor
+  description: Thief's uniform
   icon: {fileID: 0}
-  appearance: {fileID: 0}
-  defense: 0
-  speedModifier: 0
-  healthRegen: 0
-  manaRegen: 0
+  appearance: {fileID: 2800000, guid: 3fdceb323c67b68498fe263241d43d84, type: 3}
+  defense: 10
+  speedModifier: -1
+  healthRegen: 30
+  manaRegen: 5

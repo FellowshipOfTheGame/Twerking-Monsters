@@ -12,7 +12,7 @@ public class CollectableItem : MonoBehaviour {
         if (player == null)
             return;
 
-        player.temp = item;
+        player.temp = gameObject;
     }
 
     void OnTriggerExit2D(Collider2D collider) {

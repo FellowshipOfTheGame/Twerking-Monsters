@@ -5,28 +5,52 @@ using Pathfinding;
 
 public class Enemy : Entity {
 
-    public Weapon weapon;
+    public Skill attack;
     public float range;
+
+    public int enemy;
+
+    public GameObject weapon;
 
     float attackBuffer;
 
     AIPath path;
     Animator animator;
     Rigidbody2D rb2d;
+    CharacterAnimation characterAnimation;
+
+    bool defeated = false;
 
     new void Start() {
         base.Start();
 
+        characterAnimation = GetComponent<CharacterAnimation>();
+        characterAnimation.ChangeWeapon(weapon);
         path = gameObject.GetComponent<AIPath>();
         animator = gameObject.GetComponent<Animator>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+
+        animator.SetInteger("enemy", enemy);
+
+        Player player = FindObjectOfType<Player>();
+        if (player != null)
+            path.target = player.transform;
     }
 
     new void Update() {
         base.Update();
 
+        if (defeated)
+            return;
+
+        Vector2 direction = new Vector2(path.destination.x - transform.position.x, path.destination.y - transform.position.y).normalized;
+        characterAnimation.weaponDirection = direction;
+
         if (currentHealth <= 0f) {
-            Destroy(gameObject);
+            characterAnimation.enabled = false;
+            defeated = true;
+            animator.SetBool("defeated", true);
+            Destroy(gameObject, 0.5f);
             return;
         }
 
@@ -35,10 +59,9 @@ public class Enemy : Entity {
         animator.SetFloat("verticalVelocity", path.velocity.y);
 
         if (Vector2.Distance(transform.position, path.destination) <= range && attackBuffer <= 0) {
-            Vector2 direction = new Vector2(path.destination.x - transform.position.x, path.destination.y - transform.position.y).normalized;
             DisableMovement(GetAttackTimer() * 1.5f);
             attackBuffer = GetAttackTimer();
-            weapon.Attack(transform, direction, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 8 }, false);
+            attack.Trigger(transform, direction, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 8 }, false);
         }
 
 

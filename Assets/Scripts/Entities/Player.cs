@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Entity {
-    
+
     // Equipment
     [Space]
     [Header("Equipment")]
@@ -11,13 +11,13 @@ public class Player : Entity {
     public Armor armor;
     public ClassItem classItem;
 
-    [HideInInspector] public Item temp;
+    [HideInInspector] public GameObject temp;
 
     // Components
     Animator playerAnimator;
     Rigidbody2D playerRigidbody2D;
     CharacterAnimation characterAnimation;
-    
+
     // timers n stuff
     protected float attackBuffer;
 
@@ -36,6 +36,13 @@ public class Player : Entity {
 
         HandleMovement();
         HandleAttack();
+
+
+
+        if (temp != null && Input.GetKeyDown(KeyCode.E)) {
+            ChangeItem(temp.GetComponent<CollectableItem>().item);
+            Destroy(temp);
+        }
     }
 
     public void ChangeItem(Item item) {
@@ -44,7 +51,7 @@ public class Player : Entity {
             characterAnimation.ChangeWeapon(((Weapon)item).weaponObject);
         } else if (item is ClassItem) {
             classItem = item as ClassItem;
-            switch(((ClassItem)item).statModifier) {
+            switch (((ClassItem)item).statModifier) {
                 case Stat.HEALTH:
                     healthModifier = ((ClassItem)item).statModifierValue;
                     manaModifier = 0f;
@@ -83,19 +90,18 @@ public class Player : Entity {
     }
 
     void HandleAttack() {
+        Vector2 mouseWolrdPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mouseDirection = new Vector2(mouseWolrdPos.x - transform.position.x, mouseWolrdPos.y - transform.position.y).normalized;
+        characterAnimation.weaponDirection = mouseDirection;
+
         if (Input.GetButton("Fire1") && attackBuffer == 0f && weapon != null) {
-            Vector2 mouseWolrdPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 mouseDirection = new Vector2(mouseWolrdPos.x - transform.position.x, mouseWolrdPos.y - transform.position.y).normalized;
 
             characterAnimation.Attack();
             weapon.Attack(transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 }, (classItem ? classItem.name.Equals("Grimoire") : false));
             attackBuffer = GetAttackTimer();
         }
 
-        if (Input.GetButton("Fire2") && attackBuffer == 0f  && classItem != null) {
-            Vector2 mouseWolrdPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 mouseDirection = new Vector2(mouseWolrdPos.x - transform.position.x, mouseWolrdPos.y - transform.position.y).normalized;
-
+        if (Input.GetButton("Fire2") && attackBuffer == 0f && classItem != null) {
             classItem.TriggerSkill(weapon.weaponType, transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 });
             attackBuffer = GetAttackTimer();
         }

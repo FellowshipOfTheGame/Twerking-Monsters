@@ -30,6 +30,8 @@ public class CharacterAnimation : MonoBehaviour {
     protected SpriteRenderer spriteRenderer;
     protected SpriteRenderer armorRenderer;
 
+    public Vector2 weaponDirection;
+
     // De baixo para cima na sheet
     public enum PlayerState {
         MOVING_RIGHT = 0,
@@ -53,13 +55,10 @@ public class CharacterAnimation : MonoBehaviour {
             armorRenderer.sprite = GetSpriteFromSheet(armorSheet, frame, (int) state);
 
         if (weaponObject != null) {
-            Vector2 mouseWolrdPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 mouseDirection = new Vector2(mouseWolrdPos.x - transform.position.x, mouseWolrdPos.y - transform.position.y).normalized;
-
-            weaponObject.transform.localPosition = mouseDirection * weaponDistanceFromCenter;
+            weaponObject.transform.localPosition = weaponDirection * weaponDistanceFromCenter;
             
-            float weaponAngle = Vector2.Angle(Vector2.right, mouseDirection);
-            if (mouseDirection.y < 0)
+            float weaponAngle = Vector2.Angle(Vector2.right, weaponDirection);
+            if (weaponDirection.y < 0)
                 weaponAngle = 360 - weaponAngle;
             weaponAngle = SumAngles(weaponAngle, -135f);
 

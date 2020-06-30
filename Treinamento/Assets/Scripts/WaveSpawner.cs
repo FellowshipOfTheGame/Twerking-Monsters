@@ -23,12 +23,15 @@ public class WaveSpawner : MonoBehaviour {
     private bool endWaves = false;
     public bool isSpawn = false;
     private bool alredyOnFight = false;
+    public Chest chestScript;
 
     private void Start() {
         player = gameObject.GetComponent<Rigidbody2D>();
         if (spawnPoint.Length == 0) {
             Debug.LogError("Não tem ponto para spawnar!");
         }
+        chestScript = GetComponent<Chest>();
+        chestScript.enabled = false;
     }
 
     private void Update() {
@@ -47,8 +50,8 @@ public class WaveSpawner : MonoBehaviour {
 
         //Testando caso não haja mais inimigos
         if (isAlive) {
-            Debug.Log("LIBERA O BAÚ");
             //Libera o báu e libera a próxima fase
+            chestScript.enabled = true;
         }
 
     }

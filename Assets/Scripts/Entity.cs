@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Entity : MonoBehaviour {
+public abstract class Entity : MonoBehaviour
+{
 
-    public enum Stat {
+    public enum Stat
+    {
         HEALTH,
         MANA,
         ARMOR,
@@ -46,65 +48,81 @@ public abstract class Entity : MonoBehaviour {
     protected float modSpeed;
     protected float modArmor;
 
-    protected struct Buff {
+    protected struct Buff
+    {
         public float value;
         public float time;
     }
 
     // Monobehaviour lifecycle
-    protected void Start() {
+    protected void Start()
+    {
         currentHealth = maximumHealth;
         currentMana = maximumMana;
     }
 
-    protected void Update() {
+    protected void Update()
+    {
         if (currentMana < maximumMana)
             currentMana = Mathf.Clamp(currentMana + (manaRegeneration * Time.deltaTime), 0f, maximumMana);
 
-        foreach (KeyValuePair<string, Buff> buff in activeBuffs) {
-            switch (buff.Key) {
+        foreach (KeyValuePair<string, Buff> buff in activeBuffs)
+        {
+            switch (buff.Key)
+            {
                 case "damagePerSecond":
                     if (buff.Value.time <= 0)
                         activeBuffs.Remove(buff.Key);
                     else
                         currentHealth -= buff.Value.value * Time.deltaTime;
                     break;
-                
+
             }
             activeBuffs[buff.Key] = new Buff() { value = buff.Value.value, time = buff.Value.time - Time.deltaTime };
         }
     }
 
     // useful functions
-    public bool Damage(float rawDamage) {
+    public bool Damage(float rawDamage)
+    {
         currentHealth -= rawDamage * (1f - (baseArmor + armorModifier)) / 100;
         return currentHealth > 0;
     }
 
-    public void DamageOverTime(float rawDamagePerSecond, float totalSeconds) {
+    public void DamageOverTime(float rawDamagePerSecond, float totalSeconds)
+    {
         if (activeBuffs.ContainsKey("damagePerSecond"))
-            activeBuffs["damagePerSecond"] = new Buff() {
+            activeBuffs["damagePerSecond"] = new Buff()
+            {
                 time = Mathf.Max(totalSeconds, activeBuffs["damagePerSecond"].time),
                 value = Mathf.Max(rawDamagePerSecond, activeBuffs["damagePerSecond"].value),
             };
         else
             activeBuffs.Add("damagePerSecond", new Buff() { time = totalSeconds, value = rawDamagePerSecond });
     }
-
-    public bool TemporaryBuff(Stat stat, float value, float totalSeconds) {
-        switch (stat) {
+/*
+    public bool TemporaryBuff(Stat stat, float value, float totalSeconds)
+    {
+        switch (stat)
+        {
             case Stat.HEALTH:
+                return true;
                 break;
             case Stat.MANA:
+                return true;
                 break;
             case Stat.SPEED:
+                return true;
                 break;
             case Stat.ARMOR:
+                return true;
                 break;
         }
+        return true;
     }
-
-    public bool UseMana(float ammount) {
+*/
+    public bool UseMana(float ammount)
+    {
         if (currentMana < ammount)
             return false;
 
@@ -112,11 +130,13 @@ public abstract class Entity : MonoBehaviour {
         return true;
     }
 
-    public float GetMoveSpeed() {
+    public float GetMoveSpeed()
+    {
         return (baseSpeed + speedModifier) * moveSpeed;
     }
 
-    public float GetAttackSpeed() {
+    public float GetAttackSpeed()
+    {
         return (baseSpeed + speedModifier) * attackSpeed;
     }
 

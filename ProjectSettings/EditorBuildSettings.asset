@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SampleSceneAmauri.unity
+    guid: 487c41c417af28a4aaa25226e82e6945
+  - enabled: 1
+    path: Assets/Scenes/TesteMurilo.unity
+    guid: b3440edb0926b6741b933adb0e779435
   m_configObjects: {}

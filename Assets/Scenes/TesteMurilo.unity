@@ -412,9 +412,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86fea533fbf5086419b4f7973056e985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 100
-  baseSpeed: 3
-  maxManaPoints: 100
+  baseAttack: {fileID: 0}
+  target: {x: 0, y: 0}
+  maximumHealth: 0
+  maximumMana: 0
+  healthRegeneration: 0
+  manaRegeneration: 0
+  extraHealth: 0
+  baseSpeed: 0
+  moveSpeed: 0
+  attackSpeed: 0
+  baseArmor: 0
   weapon: {fileID: 11400000, guid: 64b08da7733cbd446a51014351d280e7, type: 2}
   armor: {fileID: 0}
   classItem: {fileID: 0}

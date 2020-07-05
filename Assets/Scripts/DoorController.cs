@@ -11,16 +11,16 @@ public class DoorController : MonoBehaviour
     public string nextLevelName;
     void Start()
     {
-        isOpen = false;
-        ani = gameObject.GetComponent<Animator>();
-        GameController.OnWaveEnd += OpenDoor;
+        isOpen = false;//devife a ver como false ao iniciar a cena
+        ani = gameObject.GetComponent<Animator>();//pega por paremtro o animator da porta
+        GameController.OnWaveEnd += OpenDoor; //adiciona o metodo que sera chamado
     }
     public void OpenDoor()
     {
-        if (!isOpen)
+        if (!isOpen)// se não tiver aberta 
         {
-            isOpen = true;
-            ani.SetBool("isOpen", true);
+            isOpen = true; // defina como aberta
+            ani.SetBool("isOpen", true); // e mude a animação pra aberta
         }
     }
     /// <summary>
@@ -29,10 +29,9 @@ public class DoorController : MonoBehaviour
     /// <param name="other">The other Collider involved in this collision.</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.name);
-        if (other.gameObject.tag == "Player" && isOpen)
+        if (other.gameObject.tag == "Player" && isOpen)// ve se o objeto tem a tag Player
         {
-            SceneManager.LoadScene(nextLevelName);
+            SceneManager.LoadScene(nextLevelName);// muda a fase segundo a config
         }
     }
 

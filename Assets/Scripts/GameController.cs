@@ -7,14 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public static Action OnWaveEnd;
+    public static Action OnWaveEnd; // cria uma Action com nome OnWaveEnd
     //public static event EventTeste;
     private Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType(typeof(Player)) as Player;
+        player = FindObjectOfType(typeof(Player)) as Player;// pega a referncia do player
 
         //OnWaveEnd = () => { };
     }
@@ -22,10 +22,10 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) // é temporario para testar o comando
         {
 
-            OnWaveEnd();
+            OnWaveEnd(); // chama o comando
         }
         /*if (player.currentHealth <= 0 && !player.isDead)
         {

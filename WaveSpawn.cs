@@ -1,4 +1,35 @@
-﻿using System.Collections;
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@DioUSP 
+FellowshipOfTheGame
+/
+treinamento2020-grupo1
+0
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+treinamento2020-grupo1/Treinamento/Assets/Scripts/WaveSpawner.cs
+@DioUSP
+DioUSP WaveSpawn
+Latest commit dae02a6 5 days ago
+ History
+ 1 contributor
+107 lines (83 sloc)  2.78 KB
+  
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,15 +46,16 @@ public class WaveSpawner : MonoBehaviour {
         public int enemy2amount; //Contagem de inimigos para o inimigo 2 
     }
 
-    public Wave waves;
+    public Wave[] waves;
     public Transform[] spawnPoint;
     public Rigidbody2D player;
+    public Chest chestScript;
+    private int waveCount = 0;
     private float searchCountdown = 1f;
     private bool isAlive = true;
     private bool endWaves = false;
     public bool isSpawn = false;
     private bool alredyOnFight = false;
-    public Chest chestScript;
 
     private void Start() {
         player = gameObject.GetComponent<Rigidbody2D>();
@@ -50,8 +82,15 @@ public class WaveSpawner : MonoBehaviour {
 
         //Testando caso não haja mais inimigos
         if (isAlive) {
-            //Libera o báu e libera a próxima fase
-            chestScript.enabled = true;
+            if (waveCount < waves.Length) {
+                waveCount++; //Troca a wave
+                isSpawn = true;
+                alredyOnFight = false;
+            }
+            else if(waveCount == waves.Length) {
+                //Libera o báu e libera a próxima fase
+                chestScript.enabled = true;
+            }
         }
 
     }
@@ -59,11 +98,13 @@ public class WaveSpawner : MonoBehaviour {
     //Spawnando inimigos
     void Spawn(Wave _wave) { 
 
+        //Spawnando a quantidade de inimigos do tipo 1 escolhida no inspector
         for (int i = 0; i < _wave.enemyamount; i++)
         {
             SpawnEnemy(_wave.enemy);
         }
 
+        //Spawnando a quantidade de inimigos do tipo 2 escolhida no inspector
         for (int i = 0; i < _wave.enemy2amount; i++)
         {
             SpawnEnemy(_wave.enemy2);
@@ -87,10 +128,9 @@ public class WaveSpawner : MonoBehaviour {
             
             searchCountdown = 1f;
             
-            //Testando caso haja inimigos vivos, se sim retorna verdadeiro se n retorna falso
+            //Testando caso haja inimigos vivos, se sim retorna falso se não retorna verdadeiro
             //Lembrar de colocar a tag Enemy nos inimigos
-            if (GameObject.FindGameObjectWithTag("Enemy") == null)
-            {
+            if (GameObject.FindGameObjectWithTag("Enemy") == null) {
                 return true;
             }
         }

@@ -58,7 +58,7 @@ public class WaveSpawner : MonoBehaviour {
     private bool alredyOnFight = false;
 
     private void Start() {
-        player = gameObject.GetComponent<Rigidbody2D>();
+        player = gameObject.GetComponent<Rigidbody2D>();     
         if (spawnPoint.Length == 0) {
             Debug.LogError("Não tem ponto para spawnar!");
         }
@@ -140,7 +140,16 @@ public class WaveSpawner : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Player") {
+            //Libera o spawn dos inimigos
             isSpawn = true;
+        }
+    }
+
+    private void private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.tag == "Player") {
+            //Faz o player renascer no centro do mapa
+            //Instantiate(player, colocar position, colocar rotation);
+            //Dá o dano no player
         }
     }
 

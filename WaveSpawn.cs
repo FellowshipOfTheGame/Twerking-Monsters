@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@DioUSP 
-FellowshipOfTheGame
-/
-treinamento2020-grupo1
-0
-00
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-treinamento2020-grupo1/Treinamento/Assets/Scripts/WaveSpawner.cs
-@DioUSP
-DioUSP WaveSpawn
-Latest commit dae02a6 5 days ago
- History
- 1 contributor
-107 lines (83 sloc)  2.78 KB
-  
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

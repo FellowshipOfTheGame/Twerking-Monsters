@@ -49,9 +49,8 @@ public class WaveSpawner : MonoBehaviour {
         isAlive = EnemyIsAlive();
 
         //Testando caso não haja mais inimigos
-        if (isAlive) {
-            //Libera o báu e libera a próxima fase
-            chestScript.enabled = true;
+        if (FindObjectsOfType<Enemy>().Length == 0 && isSpawn) {
+            FindObjectOfType<GameManager>().end = true;
         }
 
     }

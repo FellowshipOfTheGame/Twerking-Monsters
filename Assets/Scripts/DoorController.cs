@@ -30,7 +30,7 @@ public class DoorController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && isOpen)// ve se o objeto tem a tag Player
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);// muda a fase segundo a config
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);// muda a fase segundo a config
         }
     }
 

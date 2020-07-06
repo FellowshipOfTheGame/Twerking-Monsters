@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -93,13 +94,16 @@ public class Player : Entity {
                 Destroy(temp);
             }
 
-            //foreach (GameObject item in GameObject.FindGameObjectsWithTag("Item")) {
-            //    Destroy(item);
-            //}
+            if (SceneManager.GetActiveScene().buildIndex > 1) {
+                foreach (GameObject item in GameObject.FindGameObjectsWithTag("Item")) {
+                    Destroy(item);
+                }
+
+            }
 
         }
-            if (GameObject.FindGameObjectsWithTag("Item").Length == 0 && !FindObjectOfType<Chest>())
-                FindObjectOfType<WaveSpawner>().isSpawn = true;
+        if (GameObject.FindGameObjectsWithTag("Item").Length == 0 && !FindObjectOfType<Chest>())
+            FindObjectOfType<WaveSpawner>().isSpawn = true;
     }
 
     public void ChangeItem(BaseItem item) {

@@ -98,6 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponItems:
   - {fileID: 11400000, guid: b35648c48ff63774b9a72dc324e902ff, type: 2}
+  - {fileID: 11400000, guid: 636e3e06a25053f4599df562869b2a56, type: 2}
+  - {fileID: 11400000, guid: 54ccba0551113394198386f54d624a29, type: 2}
   classItems:
   - {fileID: 11400000, guid: 1c7da25867e19dc42b3e86172fa9a288, type: 2}
   - {fileID: 11400000, guid: 0c7680f936d743348a628dc4c0917d61, type: 2}

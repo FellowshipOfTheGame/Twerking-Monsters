@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[ExecuteInEditMode]
 public class CharacterAppearance : MonoBehaviour {
 
     [Header("Stuff")]

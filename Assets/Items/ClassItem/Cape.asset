@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Cape
   itemDescription: sei l a oq escrever
   icon: {fileID: 21300000, guid: 548f056ec7c2a884b8bdc0032d038889, type: 3}
-  swordSkill: {fileID: 0}
-  bowSkill: {fileID: 0}
-  staffSkill: {fileID: 0}
+  swordSkill: {fileID: 11400000, guid: 4ccae5e55e5d4fa42b0938dd5e9e6108, type: 2}
+  bowSkill: {fileID: 11400000, guid: b245741f90da4fa4a891368e10c4ee9e, type: 2}
+  staffSkill: {fileID: 11400000, guid: 6fc40bf212e27de4d8fbea7a1d12227d, type: 2}
   passive: {fileID: 0}

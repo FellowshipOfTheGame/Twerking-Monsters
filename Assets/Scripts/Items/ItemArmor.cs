@@ -6,6 +6,6 @@ using UnityEngine;
 public class ItemArmor : BaseItem {
 
     public Texture2D appearance;
-    public BaseBuff[] baseBuffs;
+    public BaseBuff.Modifier[] modifiers;
 
 }

@@ -25,10 +25,33 @@ public class BaseConeAttack : BaseSkill {
         PolygonCollider2D hitbox;
         hitbox = GenerateConeHitbox(parent, arcAngle, arcRadius, target);
 
-        //Collider2D[] results = new Collider2D[16];
-        //hitbox.OverlapCollider(contactFilter, results);
+        Collider2D[] results = new Collider2D[16];
+        hitbox.OverlapCollider(new ContactFilter2D() { useLayerMask = true, layerMask = layerMask }, results);
 
-        Destroy(hitbox, 2f);
+        foreach (Collider2D collider in results) {
+            if (collider == null)
+                continue;
+
+            Entity entity = collider.GetComponent<Entity>();
+
+            if (entity != null) {
+                entity.Damage(damage);
+            }
+
+            Enemy enemy = collider.GetComponent<Enemy>();
+            if (enemy != null) {
+                Vector2 dir_away = collider.transform.position - hitbox.transform.position;
+                collider.attachedRigidbody.velocity = dir_away * knockbackIntensity;
+                enemy.DisableMovement(0.5f);
+            }
+
+            if (collider.attachedRigidbody != null) {
+                Vector2 dir_away = collider.transform.position - hitbox.transform.position;
+                collider.attachedRigidbody.velocity = dir_away.normalized * knockbackIntensity;
+            }
+        }
+
+        Destroy(hitbox);
     }
 
     PolygonCollider2D GenerateConeHitbox(Transform parent, float angle, float radius, Vector2 direction) {

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32dd6c07e254c0549a2111ed7fd308aa, type: 3}
+  m_Name: HeavyArmor
+  m_EditorClassIdentifier: 
+  itemName: Heavy armor
+  itemDescription: Made out of iron
+  icon: {fileID: 21300000, guid: e5846736347b4f44a95fe1b927ad0cbe, type: 3}
+  appearance: {fileID: 2800000, guid: db86ae7d18a8ad341b70f2822ef6cdf2, type: 3}
+  modifiers:
+  - stat: 3
+    value: 20
+  - stat: 4
+    value: 0
+  - stat: 1
+    value: 40
+  - stat: 2
+    value: 2

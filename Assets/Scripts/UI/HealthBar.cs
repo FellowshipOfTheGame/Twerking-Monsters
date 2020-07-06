@@ -15,7 +15,7 @@ public class HealthBar : MonoBehaviour {
 
     void Update() {
         if (player != null)
-            SetHealth(player.currentHealth / player.maximumHealth);
+            SetHealth(player.currentHealth / player.baseHealth);
     }
 
     public void SetHealth(float percentage) {

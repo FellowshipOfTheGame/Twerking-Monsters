@@ -15,7 +15,7 @@ public class ManaBar : MonoBehaviour {
 
     void Update() {
         if (player != null)
-            SetMana(player.currentMana / player.maximumMana);
+            SetMana(player.currentMana / player.baseMana);
     }
 
     public void SetMana(float percentage) {

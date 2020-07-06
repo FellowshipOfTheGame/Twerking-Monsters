@@ -2,121 +2,120 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 public class Player : Entity {
 
-    // Equipment
-    [Space]
-    [Header("Equipment")]
-    public Weapon weapon;
-    public Armor armor;
-    public ClassItem classItem;
+    public Texture2D sexMasc;
+    public Texture2D sexFem;
+
+    protected Animator animator;
+    protected new Rigidbody2D rigidbody2D;
+    protected CharacterAppearance characterAppearance;
+
+    [Header("Inventário")]
+    public ItemWeapon weapon;
+    protected float mainAttackCooldown;
+
+    public ItemClass classItem;
+    protected float specialAttackCooldown;
+
+    public ItemArmor armor;
 
     public GameObject temp;
 
-    // Components
-    Animator playerAnimator;
-    Rigidbody2D playerRigidbody2D;
-    CharacterAnimation characterAnimation;
-
-    // timers n stuff
-    protected float attackBuffer;
-
-    new void Start() {
+    // MonoBehaviour lifecycle
+    new protected void Start() {
         base.Start();
 
-        playerAnimator = gameObject.GetComponent<Animator>();
-        playerRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-        characterAnimation = gameObject.GetComponent<CharacterAnimation>();
+        animator = GetComponent<Animator>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        characterAppearance = GetComponent<CharacterAppearance>();
+        if (PlayerPrefs.GetInt("sex") == 0) {
+            characterAppearance.skin = sexMasc;
+        } else {
+            characterAppearance.skin = sexFem;
+        }
 
-        characterAnimation.ChangeWeapon(weapon.weaponObject);
+        mainAttackCooldown = 0f;
     }
 
-    new void Update() {
+    new protected void Update() {
         base.Update();
 
-        HandleMovement();
-        HandleAttack();
-        
-        if (temp != null && Input.GetKeyDown(KeyCode.E)) {
-            ChangeItem(temp.GetComponent<CollectableItem>().item);
-            Destroy(temp);
-        }
-    }
-
-    public void ChangeItem(Item item) {
-        if (item is Weapon) {
-            weapon = item as Weapon;
-            characterAnimation.ChangeWeapon(((Weapon)item).weaponObject);
-        } else if (item is ClassItem) {
-            classItem = item as ClassItem;
-            switch (((ClassItem)item).statModifier) {
-                case Stat.HEALTH:
-                    healthModifier = ((ClassItem)item).statModifierValue;
-                    manaModifier = 0f;
-                    speedModifier = 0f;
-                    armorModifier = 0f;
-                    break;
-                case Stat.MANA:
-                    healthModifier = 0f;
-                    manaModifier = ((ClassItem)item).statModifierValue;
-                    speedModifier = 0f;
-                    armorModifier = 0f;
-                    break;
-                case Stat.SPEED:
-                    healthModifier = 0f;
-                    manaModifier = 0f;
-                    speedModifier = ((ClassItem)item).statModifierValue;
-                    armorModifier = 0f;
-                    break;
-                case Stat.ARMOR:
-                    healthModifier = 0f;
-                    manaModifier = 0f;
-                    speedModifier = 0f;
-                    armorModifier = ((ClassItem)item).statModifierValue;
-                    break;
-            }
-        } else if (item is Armor) {
-            // set stats
-            baseArmor = ((Armor)item).defense;
-            baseSpeed = ((Armor)item).speedModifier;
-            baseHealthRegeneration = ((Armor)item).healthRegen;
-            baseManaRegeneration = ((Armor)item).manaRegen;
-
-            // change sheet
-            characterAnimation.armorSheet = ((Armor)item).appearance;
-        }
-    }
-
-    void HandleAttack() {
         Vector2 mouseWolrdPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mouseDirection = new Vector2(mouseWolrdPos.x - transform.position.x, mouseWolrdPos.y - transform.position.y).normalized;
-        characterAnimation.weaponDirection = mouseDirection;
 
-        if (Input.GetButton("Fire1") && attackBuffer == 0f && weapon != null) {
+        characterAppearance.weaponDirection = mouseDirection;
 
-            characterAnimation.Attack();
-            weapon.Attack(transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 }, (classItem ? classItem.name.Equals("Grimoire") : false));
-            attackBuffer = GetAttackTimer();
+        if (Input.GetButtonDown("Fire1") && mainAttackCooldown <= 0f) {
+            characterAppearance.weaponObject.GetComponent<Animator>().SetTrigger("attack");
+            mainAttackCooldown = GetAttackTimer();
+            weapon.Attack(transform, mouseDirection, 1 << 9);
         }
 
-        if (Input.GetButton("Fire2") && attackBuffer == 0f && classItem != null) {
-            classItem.TriggerSkill(weapon.weaponType, transform, mouseDirection.normalized, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 9 });
-            attackBuffer = GetAttackTimer();
+        if (Input.GetButtonDown("Fire2") && specialAttackCooldown <= 0f) {
+            characterAppearance.weaponObject.GetComponent<Animator>().SetTrigger("attack");
+            specialAttackCooldown = classItem.GetCooldown(weapon.type);
+            classItem.TriggerSkill(weapon.type, transform, mouseDirection, 1 << 9);
         }
 
-        if (attackBuffer > 0f)
-            attackBuffer = Mathf.Clamp(attackBuffer - Time.deltaTime, 0f, attackBuffer);
+        HandleMovement();
+
+        if (mainAttackCooldown > 0f)
+            mainAttackCooldown -= Time.deltaTime;
+
+        if (specialAttackCooldown > 0f)
+            specialAttackCooldown -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (temp != null) {
+                ChangeItem(temp.GetComponent<ObjectItem>().item);
+                Destroy(temp);
+            }
+
+            //foreach (GameObject item in GameObject.FindGameObjectsWithTag("Item")) {
+            //    Destroy(item);
+            //}
+
+        }
+            if (GameObject.FindGameObjectsWithTag("Item").Length == 0 && !FindObjectOfType<Chest>())
+                FindObjectOfType<WaveSpawner>().isSpawn = true;
     }
 
-    void HandleMovement() {
-        float dirHorizontal = Input.GetAxisRaw("Horizontal");
-        float dirVertical = Input.GetAxisRaw("Vertical");
+    public void ChangeItem(BaseItem item) {
+        if (item is ItemWeapon) {
+            weapon = item as ItemWeapon;
+            characterAppearance.ChangeWeapon(weapon.weaponObject);
+        } else if (item is ItemArmor) {
+            if (armor) {
+                foreach (BaseBuff.Modifier modifier in armor.modifiers) {
+                    AddToModifier(modifier.stat, -modifier.value);
+                }
+            }
 
-        Vector2 direction = new Vector2(dirHorizontal, dirVertical).normalized;
+            armor = item as ItemArmor;
+            characterAppearance.armor = armor.appearance;
 
-        playerAnimator.SetFloat("horizontalVelocity", dirHorizontal);
-        playerAnimator.SetFloat("verticalVelocity", dirVertical);
-
-        playerRigidbody2D.velocity = direction * GetMoveSpeed();
+            foreach (BaseBuff.Modifier modifier in armor.modifiers) {
+                AddToModifier(modifier.stat, modifier.value);
+            }
+        } else if (item is ItemClass) {
+            classItem = item as ItemClass;
+        }
     }
+
+    // Other functions
+    protected void HandleMovement() {
+        float hDir = Input.GetAxisRaw("Horizontal");
+        float vDir = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("horizontalSpeed", hDir);
+        animator.SetFloat("verticalSpeed", vDir);
+
+        Vector2 dir = new Vector2(hDir, vDir).normalized;
+        rigidbody2D.velocity = dir * GetMoveSpeed();
+    }
+
 }

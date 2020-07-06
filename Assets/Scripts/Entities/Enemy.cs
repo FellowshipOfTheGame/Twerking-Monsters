@@ -1,67 +1,65 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 
 public class Enemy : Entity {
 
-    public Skill attack;
+    public BaseSkill attack;
     public float range;
-
-    public int enemy;
-
-    public GameObject death;
-    public GameObject weapon;
-
     float attackBuffer;
 
-    AIPath path;
-    Animator animator;
-    Rigidbody2D rb2d;
-    CharacterAnimation characterAnimation;
+    protected Animator animator;
+    protected CharacterAppearance characterAppearance;
 
-    bool defeated = false;
+    // AI components
+    protected Pathfinding.AIDestinationSetter destinationSetter;
+    protected Pathfinding.AIPath path;
 
-    new void Start() {
+    bool dead;
+
+    protected new void Start() {
         base.Start();
 
-        characterAnimation = GetComponent<CharacterAnimation>();
-        characterAnimation.ChangeWeapon(weapon);
-        path = gameObject.GetComponent<AIPath>();
-        animator = gameObject.GetComponent<Animator>();
-        rb2d = gameObject.GetComponent<Rigidbody2D>();
+        dead = false;
 
-        animator.SetInteger("enemy", enemy);
+        animator = GetComponent<Animator>();
+        characterAppearance = GetComponent<CharacterAppearance>();
+
+        destinationSetter = GetComponent<Pathfinding.AIDestinationSetter>();
+        path = GetComponent<Pathfinding.AIPath>();
 
         Player player = FindObjectOfType<Player>();
-        if (player != null)
-            path.target = player.transform;
-    }
-
-    new void Update() {
-        base.Update();
-
-        if (defeated)
-            return;
-
-        Vector2 direction = new Vector2(path.destination.x - transform.position.x, path.destination.y - transform.position.y).normalized;
-        characterAnimation.weaponDirection = direction;
-
-        if (currentHealth <= 0f) {
-            GameObject morte = Instantiate(death, transform.position, Quaternion.identity);
-            Destroy(morte, 0.5f);
-            Destroy(gameObject);
-            return;
-        }
+        if (player)
+            destinationSetter.target = player.transform;
 
         path.maxSpeed = GetMoveSpeed();
-        animator.SetFloat("horizontalVelocity", path.velocity.x);
-        animator.SetFloat("verticalVelocity", path.velocity.y);
+    }
+
+    protected new void Update() {
+        base.Update();
+
+        if (currentHealth <= 0 && !dead) {
+            dead = true;
+            animator.SetTrigger("defeat");
+            DisableMovement(2f);
+            Destroy(gameObject, 0.3f);
+        }
+
+        Vector2 direction = new Vector2(path.destination.x - transform.position.x, path.destination.y - transform.position.y).normalized;
+
+        characterAppearance.weaponDirection = new Vector2(path.target.position.x - transform.position.x, path.target.transform.position.y - transform.position.y).normalized;
+
+        if (Vector2.Distance(transform.position, destinationSetter.target.position) <= range) {
+            characterAppearance.weaponObject.GetComponent<Animator>().SetTrigger("attack");
+        }
+
+        animator.SetFloat("horizontalDir", path.velocity.x);
+        animator.SetFloat("verticalDir", path.velocity.y);
 
         if (Vector2.Distance(transform.position, path.destination) <= range && attackBuffer <= 0) {
             DisableMovement(GetAttackTimer() * 1.5f);
             attackBuffer = GetAttackTimer();
-            attack.Trigger(transform, direction, new ContactFilter2D() { useLayerMask = true, layerMask = 1 << 8 }, false);
+            attack.Trigger(transform, direction, 1 << 8);
         }
 
 

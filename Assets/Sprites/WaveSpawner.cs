@@ -20,7 +20,6 @@ public class WaveSpawner : MonoBehaviour {
     public Rigidbody2D player;
     private float searchCountdown = 1f;
     private bool isAlive = true;
-    private bool endWaves = false;
     public bool isSpawn = false;
     private bool alredyOnFight = false;
     public Chest chestScript;

@@ -25,9 +25,13 @@ public class Player : Entity {
 
     public GameObject temp;
 
+    bool dead;
+
     // MonoBehaviour lifecycle
     new protected void Start() {
         base.Start();
+
+        DontDestroyOnLoad(this.gameObject);
 
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -38,11 +42,25 @@ public class Player : Entity {
             characterAppearance.skin = sexFem;
         }
 
+        dead = false;
+
         mainAttackCooldown = 0f;
     }
 
     new protected void Update() {
         base.Update();
+
+        if (dead)
+            return;
+
+        if (currentHealth <= 0 && !dead) {
+            dead = true;
+            animator.SetTrigger("defeat");
+
+            foreach (Enemy enemy in GameObject.FindObjectsOfType<Enemy>()) {
+                enemy.Win();
+            }
+        }
 
         Vector2 mouseWolrdPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mouseDirection = new Vector2(mouseWolrdPos.x - transform.position.x, mouseWolrdPos.y - transform.position.y).normalized;

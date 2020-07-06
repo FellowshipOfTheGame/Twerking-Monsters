@@ -67,6 +67,12 @@ public class Enemy : Entity {
             attackBuffer -= Time.deltaTime;
     }
 
+    public void Win() {
+        animator.SetTrigger("win");
+        path.enabled = false;
+        destinationSetter.enabled = false;
+    }
+
     public void DisableMovement(float time) {
         StartCoroutine(DisablePath(time));
     }

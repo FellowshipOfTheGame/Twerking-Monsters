@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11fadb09f383e74099535d5c2135a73, type: 3}
   m_Name: Melee
   m_EditorClassIdentifier: 
+  cost: 0
   cooldown: 0
   effect: {fileID: 0}
   whichDirectionIsUp: {x: 0, y: 0}
   effectPositionOffset: {x: 0, y: 0}
   arcAngle: 90
-  arcRadius: 1.5
-  damage: 10
-  knockbackIntensity: 2
+  arcRadius: 2
+  damage: 25
+  knockbackIntensity: 0

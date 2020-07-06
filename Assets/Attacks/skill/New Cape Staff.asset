@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 50
   cooldown: 3
-  effect: {fileID: 7359117962228140106, guid: 1784a3e752136a943a966c27fd3fbcac, type: 3}
+  effect: {fileID: 8447658017299105981, guid: 3c5fd79750adfa349a81a16b7a0a7d4e, type: 3}
   whichDirectionIsUp: {x: 0, y: 0}
   effectPositionOffset: {x: 0, y: 0}
   buffs: {fileID: 11400000, guid: 97033f4bf72076a42ab2b632b7747723, type: 2}

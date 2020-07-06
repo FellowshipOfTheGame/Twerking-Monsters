@@ -16,7 +16,7 @@ MonoBehaviour:
   cooldown: 2
   effect: {fileID: 1986848568678412432, guid: af38a23d3ca242142855648a47bfeaa3, type: 3}
   whichDirectionIsUp: {x: -1, y: 1}
-  effectPositionOffset: {x: 1, y: 1}
+  effectPositionOffset: {x: 0, y: 1}
   arcAngle: 90
   arcRadius: 2
   damageOverTime: 30

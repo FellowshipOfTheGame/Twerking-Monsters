@@ -56,8 +56,16 @@ MonoBehaviour:
   baseArmor: 0
   baseSpeed: 1
   attackSpeedMultiplier: 1
-  moveSpeedMultiplier: 1
-  attackRange: 1
+  moveSpeedMultiplier: 2
+  currentHealth: 0
+  currentMana: 0
+  extraHealthModifier: 0
+  healthRegenModifier: 0
+  manaRegenModifier: 0
+  armorModifier: 0
+  speedModifier: 0
+  attack: {fileID: 11400000, guid: 36492f48072ddce4b9d376b19f2869f4, type: 2}
+  range: 1.5
 --- !u!114 &4489529045392428732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +152,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 2
+  maxSpeed: 1
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -175,7 +183,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 15
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

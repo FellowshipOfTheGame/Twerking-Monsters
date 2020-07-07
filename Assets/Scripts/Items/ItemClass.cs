@@ -11,6 +11,21 @@ public class ItemClass : BaseItem {
 
     public BaseBuff passive;
 
+    public float GetCooldown(ItemWeapon.Type weaponType) {
+        switch (weaponType) {
+            case ItemWeapon.Type.SWORD:
+                return swordSkill.cooldown;
+
+            case ItemWeapon.Type.BOW:
+                return bowSkill.cooldown;
+
+            case ItemWeapon.Type.STAFF:
+                return staffSkill.cooldown;
+        }
+
+        return 0f;
+    }
+
     public void TriggerSkill(ItemWeapon.Type weaponType, Transform parent, Vector2 target, LayerMask layerMask) {
         switch (weaponType) {
             case ItemWeapon.Type.SWORD:

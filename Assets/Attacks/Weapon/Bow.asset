@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aed2026cbdacb5469cbeaf5fd007e82, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
+  cost: 0
   cooldown: 0
-  whichDirectionIsUp: {x: 0, y: 0}
   effect: {fileID: 0}
+  whichDirectionIsUp: {x: 0, y: 0}
   effectPositionOffset: {x: 0, y: 0}
-  projectile: {fileID: 0}
-  speed: 0
+  projectile: {fileID: 8932712115414055564, guid: 3d8a339e6db58494aaf4e7cb92193175,
+    type: 3}
+  speed: 10
+  maxDistance: 20

@@ -13,16 +13,19 @@ public class Entity : MonoBehaviour {
     public float attackSpeedMultiplier;
     public float moveSpeedMultiplier;
 
-    protected float currentHealth;
-    protected float currentMana;
+    public float currentHealth;
+    public float currentMana;
 
     protected float healthModifier;
 
-    protected float extraHealthModifier;
-    protected float healthRegenModifier;
-    protected float manaRegenModifier;
-    protected float armorModifier;
-    protected float speedModifier;
+    public float extraHealthModifier;
+    public float healthRegenModifier;
+    public float manaRegenModifier;
+    public float armorModifier;
+    public float speedModifier;
+
+    private float damageOverTime;
+    private float timeRemaining;
 
     public enum Stat {
         EXTRA_HEALTH,
@@ -34,11 +37,21 @@ public class Entity : MonoBehaviour {
 
     protected void Start() {
         currentHealth = baseHealth;
+        currentMana = baseMana;
     }
 
     protected void Update() {
         if (Input.GetKeyDown(KeyCode.K))
             Damage(10f);
+
+        if (timeRemaining > 0 && damageOverTime > 0)
+            Damage(damageOverTime * Time.deltaTime);
+
+        if (timeRemaining > 0)
+            timeRemaining -= Time.deltaTime;
+
+        if (currentMana < baseMana)
+            currentMana += manaRegenModifier * Time.deltaTime;
     }
 
     public void Damage(float damage) {
@@ -52,6 +65,20 @@ public class Entity : MonoBehaviour {
         }
     }
 
+    public bool UseMana(float mana) {
+        if (currentMana >= mana) {
+            currentMana -= mana;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void DamageOverTime(float dps, float time) {
+        damageOverTime = dps;
+        timeRemaining = time;
+    }
+
     public float GetAttackTimer() {
         return attackSpeedMultiplier / (baseSpeed + speedModifier);
     }
@@ -63,19 +90,19 @@ public class Entity : MonoBehaviour {
     public void AddToModifier(Stat stat, float value) {
         switch (stat) {
             case Stat.EXTRA_HEALTH:
-                healthModifier += value;
+                extraHealthModifier += value;
                 break;
             case Stat.HEALTH_REGEN:
-                healthModifier += value;
+                healthRegenModifier += value;
                 break;
             case Stat.MANA_REGEN:
-                healthModifier += value;
+                manaRegenModifier += value;
                 break;
             case Stat.ARMOR:
-                healthModifier += value;
+                armorModifier += value;
                 break;
             case Stat.SPEED:
-                healthModifier += value;
+                speedModifier += value;
                 break;
         }
     }

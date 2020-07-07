@@ -16,5 +16,12 @@ MonoBehaviour:
   itemDescription: Made out of iron
   icon: {fileID: 21300000, guid: e5846736347b4f44a95fe1b927ad0cbe, type: 3}
   appearance: {fileID: 2800000, guid: db86ae7d18a8ad341b70f2822ef6cdf2, type: 3}
-  baseBuffs:
-  - {fileID: 0}
+  modifiers:
+  - stat: 3
+    value: 15
+  - stat: 4
+    value: 0
+  - stat: 1
+    value: 40
+  - stat: 2
+    value: 2

@@ -18,9 +18,9 @@ public class Chest : MonoBehaviour {
         int armorIndex = Random.Range(0, armorItems.Length);
         int classIndex = Random.Range(0, classItems.Length);
 
-        GameObject weapon = weaponItems[weaponIndex].CreateCollectible((Vector2)transform.position + new Vector2(-1.5f, 0f));
+        GameObject weapon = weaponItems[weaponIndex].CreateCollectible((Vector2)transform.position + new Vector2(-2f, 0f));
         GameObject classItem = classItems[classIndex].CreateCollectible((Vector2)transform.position + new Vector2(0f, 0f));
-        GameObject armor = armorItems[armorIndex].CreateCollectible((Vector2)transform.position + new Vector2(1.5f, 0f));
+        GameObject armor = armorItems[armorIndex].CreateCollectible((Vector2)transform.position + new Vector2(2f, 0f));
 
         Destroy(gameObject);
     }

@@ -1361,7 +1361,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 1
+    enabled: 0
     mode: 0
     timeMode: 0
     fps: 30
@@ -4709,7 +4709,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2a1e5cf8a567df941bbe4a32eb87c6e1, type: 2}
+  - {fileID: 2100000, guid: 240d2d4f4199d1e4c8f1f63f263b47ac, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

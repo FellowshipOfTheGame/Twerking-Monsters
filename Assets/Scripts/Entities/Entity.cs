@@ -16,8 +16,6 @@ public class Entity : MonoBehaviour {
     public float currentHealth;
     public float currentMana;
 
-    protected float healthModifier;
-
     public float extraHealthModifier;
     public float healthRegenModifier;
     public float manaRegenModifier;
@@ -57,11 +55,11 @@ public class Entity : MonoBehaviour {
     public void Damage(float damage) {
         float armorDefense = (100f - Mathf.Clamp(baseArmor + armorModifier, 0f, 100f)) / 100f;
 
-        healthModifier -= damage * armorDefense;
+        extraHealthModifier -= damage * armorDefense;
 
-        if (healthModifier < 0) {
-            currentHealth += healthModifier * armorDefense;
-            healthModifier = 0;
+        if (extraHealthModifier < 0) {
+            currentHealth += extraHealthModifier * armorDefense;
+            extraHealthModifier = 0;
         }
     }
 

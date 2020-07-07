@@ -28,6 +28,9 @@ public class Player : Entity {
 
     bool dead;
 
+    public GameObject shield;
+    SpriteRenderer shieldSpriteRenderer;
+
     // MonoBehaviour lifecycle
     new protected void Start() {
         base.Start();
@@ -46,10 +49,18 @@ public class Player : Entity {
         dead = false;
 
         mainAttackCooldown = 0f;
+
+        shieldSpriteRenderer = shield.GetComponent<SpriteRenderer>();
     }
 
     new protected void Update() {
         base.Update();
+
+        if (extraHealthModifier > 0f)
+            shieldSpriteRenderer.color = new Color(shieldSpriteRenderer.color.r, shieldSpriteRenderer.color.g, shieldSpriteRenderer.color.b, extraHealthModifier / 100f);
+        else
+            shieldSpriteRenderer.color = new Color(shieldSpriteRenderer.color.r, shieldSpriteRenderer.color.g, shieldSpriteRenderer.color.b, 0f);
+
         if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
         if (dead)
             return;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 50
   cooldown: 2
-  effect: {fileID: 4294636431036161666, guid: c7046e39c24ac2e4f8b6e119b032f4ec, type: 3}
+  effect: {fileID: 0}
   whichDirectionIsUp: {x: 0, y: 0}
-  effectPositionOffset: {x: 0, y: 0}
+  distanceFromCenter: 0
   vida: {fileID: 11400000, guid: f9505824aec5a0f4e8c896e3cbcaab96, type: 2}

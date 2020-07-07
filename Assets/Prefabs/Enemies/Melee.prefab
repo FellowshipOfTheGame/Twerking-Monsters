@@ -55,7 +55,7 @@ MonoBehaviour:
   baseMana: 0
   baseArmor: 0
   baseSpeed: 1
-  attackSpeedMultiplier: 1
+  attackSpeedMultiplier: 0.5
   moveSpeedMultiplier: 2
   currentHealth: 0
   currentMana: 0

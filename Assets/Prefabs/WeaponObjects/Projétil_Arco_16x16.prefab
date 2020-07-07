@@ -122,8 +122,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  damage: 20
-  piercing: 0
+  damage: 10
+  piercing: 1
 --- !u!61 &6631358023173383886
 BoxCollider2D:
   m_ObjectHideFlags: 0

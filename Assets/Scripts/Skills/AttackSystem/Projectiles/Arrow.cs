@@ -9,8 +9,10 @@ public class Arrow : BaseProjectile {
 
     public override void OnTargetHit(Collider2D targetCollider, LayerMask laykerMask) {
        
-        
-        Enemy entity = targetCollider.GetComponent<Enemy>();
+       if (1 << targetCollider.gameObject.layer != layerMask.value) {
+            return;
+        } 
+        Entity entity = targetCollider.GetComponent<Entity>();
 
         if (!entity)
             return;

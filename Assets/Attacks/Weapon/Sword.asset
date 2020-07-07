@@ -16,8 +16,8 @@ MonoBehaviour:
   cooldown: 0
   effect: {fileID: 0}
   whichDirectionIsUp: {x: 0, y: 0}
-  effectPositionOffset: {x: 0, y: 0}
+  distanceFromCenter: 2
   arcAngle: 90
   arcRadius: 2
-  damage: 25
-  knockbackIntensity: 5
+  damage: 30
+  knockbackIntensity: 4

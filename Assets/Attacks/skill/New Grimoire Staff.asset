@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 50
   cooldown: 3
-  effect: {fileID: 6882578328567683353, guid: 0cb1cd860f1639442a51d5620b212d75, type: 3}
+  effect: {fileID: 1431053787668238175, guid: 4801ca11a646da44288a3a51bc68f5a8, type: 3}
   whichDirectionIsUp: {x: 0, y: 0}
-  effectPositionOffset: {x: 0, y: 0}
+  distanceFromCenter: 0
   arcAngle: 360
   arcRadius: 3
   damagePerSecond: 10

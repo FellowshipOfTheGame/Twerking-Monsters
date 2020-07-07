@@ -65,7 +65,7 @@ MonoBehaviour:
   armorModifier: 0
   speedModifier: 0
   attack: {fileID: 11400000, guid: e34f2dea6c29a5840b110699323b9799, type: 2}
-  range: 3
+  range: 5.5
 --- !u!114 &4822670222369905981
 MonoBehaviour:
   m_ObjectHideFlags: 0

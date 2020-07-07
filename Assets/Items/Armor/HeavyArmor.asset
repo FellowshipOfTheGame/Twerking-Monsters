@@ -18,7 +18,7 @@ MonoBehaviour:
   appearance: {fileID: 2800000, guid: db86ae7d18a8ad341b70f2822ef6cdf2, type: 3}
   modifiers:
   - stat: 3
-    value: 15
+    value: 20
   - stat: 4
     value: 0
   - stat: 1

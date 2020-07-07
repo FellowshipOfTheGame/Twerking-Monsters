@@ -16,7 +16,7 @@ MonoBehaviour:
   cooldown: 2
   effect: {fileID: 0}
   whichDirectionIsUp: {x: 0, y: 0}
-  effectPositionOffset: {x: 0, y: 0}
+  distanceFromCenter: 0
   projectile: {fileID: 995809021508399285, guid: 97a7349954669cf43a93b24f1a6bd23c,
     type: 3}
   speed: 10

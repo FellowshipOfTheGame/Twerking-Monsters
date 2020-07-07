@@ -123,7 +123,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   damage: 20
-  piercing: 1
+  piercing: 0
 --- !u!61 &4522888481874995473
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -165,17 +165,17 @@ PrefabInstance:
     - target: {fileID: 6524293642787900726, guid: cae7d380828d5074b984d9a062018edb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.0048
       objectReference: {fileID: 0}
     - target: {fileID: 6524293642787900726, guid: cae7d380828d5074b984d9a062018edb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0172
       objectReference: {fileID: 0}
     - target: {fileID: 6524293642787900726, guid: cae7d380828d5074b984d9a062018edb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6524293642787900726, guid: cae7d380828d5074b984d9a062018edb,
         type: 3}
